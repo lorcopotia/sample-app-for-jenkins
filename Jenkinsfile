@@ -1,36 +1,31 @@
-/* def USER_ = ${USER}
-def PASS_PROD_LC_ = ${PASS_PROD_LC} */
 pipeline {
-  agent any
+    agent any
+
     environment {
-        /* EXAMPLE_CREDS = credentials('example-credentials-id') */
-        USER_ = "PEPE${USER}"
+        MY_VAR = ""
     }
+
     stages {
-        stage('Example') {
-            steps {
-                /* CORRECT */
-                /* sh('curl -u $EXAMPLE_CREDS_USR:$EXAMPLE_CREDS_PSW https://example.com/') */
-                echo "USER is ${USER_}"
-                echo "MSG is ${TEST}"
-            }
-		}
-		stage('Printing environment vars') {
-			steps {
-					sh 'printenv'
-				}
-		}
-        
-        stage('Build') {
+        stage('Read BuildConfig') {
             steps {
                 script {
-					openshift.withCluster() {
-						openshift.withProject(env.DEV_PROJECT) {
-						openshift.newBuild("--name=el-nuevo", "--image-stream=openshift/redhat-openjdk18-openshift:1.8", "--binary")
-						}
-					}
-				}
-			}
-		}   
+                    openshift.withCluster() {
+                        openshift.withProject(env.DEV_PROJECT) {
+                            openshift.withEnv('my-buildconfig') { envVars ->
+                                // Accede a las variables de entorno del BuildConfig
+                                MY_VAR = envVars.MY_VARIABLE
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Use BuildConfig Variable') {
+            steps {
+                echo "The variable value is: ${MY_VAR}"
+            }
+        }
     }
 }
+
