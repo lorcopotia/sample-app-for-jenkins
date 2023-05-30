@@ -7,8 +7,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Database engine is ${DB_ENGINE}"
-                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
+                echo "USER is ${USER}"
+                echo "PASS_LC is ${PASS_PROD_LC}"
+                echo "PASS_LC is ${PASS_PROD_CN}"
                 sh 'printenv'
             }
         }
