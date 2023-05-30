@@ -1,3 +1,5 @@
+def USER_ = ${USER}
+def PASS_PROD_LC_ = ${PASS_PROD_LC}"
 pipeline {
   agent any
   options {
@@ -7,8 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "USER is ${USER}"
-                echo "PASS_LC is ${PASS_PROD_LC}"
+                echo "USER is ${USER_}"
+                echo "PASS_LC is ${PASS_PROD_LC_}"
                 echo "PASS_CN is ${PASS_PROD_CN}"
                 sh 'printenv'
             }
