@@ -14,9 +14,11 @@ pipeline {
                 echo "USER is ${USER_}"
                 echo "MSG is ${TEST}"
             }
+	stage('Printing environment vars') {
 	    steps {
                 sh 'printenv'
             }
+	}
         }
         stage('Build') {
             steps {
