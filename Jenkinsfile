@@ -13,7 +13,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject(env.DEV_PROJECT) {
-                            openshift.withEnv('new-jenkins-pipeline') { envVars ->
+                            openshift.withEnv('new-jenkins-pipeline') { //envVars ->
                                 // Accede a las variables de entorno del BuildConfig
                                 USER = envVars.USER
                                 PASS_PROD_LC = envVars.PASS_PROD_LC
