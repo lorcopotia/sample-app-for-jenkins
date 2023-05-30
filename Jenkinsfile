@@ -4,7 +4,7 @@ pipeline {
   agent any
     environment {
         /* EXAMPLE_CREDS = credentials('example-credentials-id') */
-        USER_ = ${USER}
+        USER_ = "${USER}"
     }
     stages {
         stage('Example') {
