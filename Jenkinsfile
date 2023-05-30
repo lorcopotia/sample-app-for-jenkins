@@ -2,7 +2,9 @@ pipeline {
     agent any
 
     environment {
-        MY_VAR = ""
+        USER = ""
+        PASS_PROD_LC = ""
+        PASS_PROD_CN = ""
     }
 
     stages {
@@ -11,9 +13,11 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject(env.DEV_PROJECT) {
-                            openshift.withEnv('my-buildconfig') { envVars ->
+                            openshift.withEnv('new-jenkins-pipeline') { envVars ->
                                 // Accede a las variables de entorno del BuildConfig
-                                MY_VAR = envVars.MY_VARIABLE
+                                USER = envVars.USER
+                                PASS_PROD_LC = envVars.PASS_PROD_LC
+                                PASS_PROD_CN = envVars.PASS_PROD_CN
                             }
                         }
                     }
@@ -23,7 +27,9 @@ pipeline {
 
         stage('Use BuildConfig Variable') {
             steps {
-                echo "The variable value is: ${MY_VAR}"
+                echo "The variable value is: ${USER}"
+                echo "The variable value is: ${PASS_PROD_LC}"
+                echo "The variable value is: ${PASS_PROD_CN}"
             }
         }
     }
