@@ -14,22 +14,23 @@ pipeline {
                 echo "USER is ${USER_}"
                 echo "MSG is ${TEST}"
             }
-	stage('Printing environment vars') {
-	    steps {
-                sh 'printenv'
-            }
-	}
-        }
+		}
+		stage('Printing environment vars') {
+			steps {
+					sh 'printenv'
+				}
+		}
+        
         stage('Build') {
             steps {
                 script {
-                            openshift.withCluster() {
-                                openshift.withProject(env.DEV_PROJECT) {
-                                openshift.newBuild("--name=el-nuevo", "--image-stream=openshift/redhat-openjdk18-openshift:1.8", "--binary")
-                                }
-                            }
+					openshift.withCluster() {
+						openshift.withProject(env.DEV_PROJECT) {
+						openshift.newBuild("--name=el-nuevo", "--image-stream=openshift/redhat-openjdk18-openshift:1.8", "--binary")
+						}
+					}
+				}
 			}
-	    }
-	}   
+		}   
     }
 }
