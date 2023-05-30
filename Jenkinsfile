@@ -19,17 +19,17 @@ pipeline {
             steps {
                 script {
                     // Obtener el secreto desde OpenShift
-			/*
+		/*
                     def secret = openshift.withCluster() {
                         openshift.withProject('jenkins-app') {
                             openshift.withCredentials([openshiftServiceAccount(credentialsId: 'id-del-secreto')]) {
                                 openshift.selector('secret', 'pipeline-credentials').object()
                             }
                         }
-                    } */
-				}
-			}
+                    } 
+		*/
 		}
-        
+	    }
+	}   
     }
 }
