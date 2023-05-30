@@ -3,7 +3,8 @@ def PASS_PROD_LC_ = ${PASS_PROD_LC} */
 pipeline {
   agent any
     environment {
-        EXAMPLE_CREDS = credentials('example-credentials-id')
+        /* EXAMPLE_CREDS = credentials('example-credentials-id') */
+        USER_ = ${USER}
     }
     stages {
         stage('Example') {
