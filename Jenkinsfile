@@ -1,5 +1,5 @@
 def USER_ = ${USER}
-def PASS_PROD_LC_ = ${PASS_PROD_LC}"
+def PASS_PROD_LC_ = ${PASS_PROD_LC}
 pipeline {
   agent any
   options {
