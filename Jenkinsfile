@@ -18,17 +18,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Obtener el secreto desde OpenShift
-		/*
-                    def secret = openshift.withCluster() {
-                        openshift.withProject('jenkins-app') {
-                            openshift.withCredentials([openshiftServiceAccount(credentialsId: 'id-del-secreto')]) {
-                                openshift.selector('secret', 'pipeline-credentials').object()
+                            openshift.withCluster() {
+                                openshift.withProject(env.DEV_PROJECT) {
+                                openshift.newBuild("--name=el-nuevo", "--image-stream=openshift/redhat-openjdk18-openshift:1.8", "--binary")
+                                }
                             }
-                        }
-                    } 
-		*/
-		}
+			}
 	    }
 	}   
     }
