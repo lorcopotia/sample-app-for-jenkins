@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo "USER is ${USER}"
                 echo "PASS_LC is ${PASS_PROD_LC}"
-                echo "PASS_LC is ${PASS_PROD_CN}"
+                echo "PASS_CN is ${PASS_PROD_CN}"
                 sh 'printenv'
             }
         }
