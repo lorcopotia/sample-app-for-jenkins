@@ -1,11 +1,19 @@
-def USER_ = ${USER}
-def PASS_PROD_LC_ = ${PASS_PROD_LC}
+/* def USER_ = ${USER}
+def PASS_PROD_LC_ = ${PASS_PROD_LC} */
 pipeline {
   agent any
-  options {
-    timeout(time: 20, unit: 'MINUTES') 
-  }
-
+    environment {
+        EXAMPLE_CREDS = credentials('example-credentials-id')
+    }
+    stages {
+        stage('Example') {
+            steps {
+                /* CORRECT */
+                /* sh('curl -u $EXAMPLE_CREDS_USR:$EXAMPLE_CREDS_PSW https://example.com/') */
+                echo "USER is ${USER_}"
+            }
+        }
+    }
     stages {
         stage('Build') {
             steps {
