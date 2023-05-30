@@ -14,8 +14,6 @@ pipeline {
                 echo "USER is ${USER_}"
             }
         }
-    }
-    stages {
         stage('Build') {
             steps {
                 echo "USER is ${USER_}"
