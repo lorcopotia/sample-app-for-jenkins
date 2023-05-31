@@ -24,6 +24,26 @@ pipeline {
                 }
             }
         }
+        
+        stage('Read BuildConfig') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject(env.DEV_PROJECT) {
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<namespace>-pipeline-credentials', passwordVariable: 'PASS_PROD_LC']]) {
+                              // available as an env variable, but will be masked if you try to print it out any which way
+                              // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
+                              sh 'echo $PASS_PROD_LC'
+                              // also available as a Groovy variable
+                              echo PASS_PROD_LC
+                              // or inside double quotes for string interpolation
+                              echo "token is $PASS_PROD_LC"
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         stage('Use BuildConfig Variable') {
             steps {
