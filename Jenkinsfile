@@ -5,10 +5,12 @@ pipeline {
         USER = ""
         PASS_PROD_LC = ""
         PASS_PROD_CN = ""
+        
+        YOUR_CRED = credentials('jenkins-app-pipeline-credentials') 
     }
 
     stages {
-        /* stage('Read BuildConfig') {
+         stage('Read BuildConfig') {
             steps {
                 script {
                     openshift.withCluster() {
@@ -18,14 +20,18 @@ pipeline {
                                 USER = envVars.USER
                                 PASS_PROD_LC = envVars.PASS_PROD_LC
                                 PASS_PROD_CN = envVars.PASS_PROD_CN
+                                
+                                echo "To call User use ${USER}"
+                                echo "To call PASS_PROD_LC use ${PASS_PROD_LC}"
+                                echo "To call PASS_PROD_CN use ${PASS_PROD_CN}"
                             }
                         }
                     }
                 }
             }
-        } */
+        } 
         
-        stage('Read synced credentials') {
+        /* stage('Read synced credentials') {
             steps {
                 script {
                     openshift.withCluster() {
@@ -42,7 +48,7 @@ pipeline {
                         }
                     }
                 }
-            }
+            } */
         }
 
         stage('Use BuildConfig Variable') {
