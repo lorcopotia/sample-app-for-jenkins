@@ -25,7 +25,7 @@ pipeline {
             }
         }
         
-        stage('Read BuildConfig') {
+        stage('Read synced credentials') {
             steps {
                 script {
                     openshift.withCluster() {
