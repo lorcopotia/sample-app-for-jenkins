@@ -30,7 +30,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject(env.DEV_PROJECT) {
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '${env.DEV_PROJECT}-pipeline-credentials', passwordVariable: 'PASS_PROD_LC']]) {
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${env.DEV_PROJECT}-pipeline-credentials", passwordVariable: 'PASS_PROD_LC']]) {
                               // available as an env variable, but will be masked if you try to print it out any which way
                               // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
                               sh 'echo $PASS_PROD_LC'
