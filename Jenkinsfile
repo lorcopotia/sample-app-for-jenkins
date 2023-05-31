@@ -13,6 +13,8 @@ pipeline {
          stage('Read BuildConfig') {
             steps {
                 sh 'printenv'
+                sh 'echo $YOUR_CRED'
+
             }
         } 
         
