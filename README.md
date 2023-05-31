@@ -26,4 +26,29 @@ type: Opaque
 
 ```
 
+Asegurate de crear un BuildConfig apuntando al repo:
 
+```yaml
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: my-build
+  namespace: jenkins-app
+spec:
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/lorcopotia/sample-app-for-jenkins.git'
+    type: Git
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
+      env: []
+```
+
+Agregar el trigger correspondiente:
+
+```shell
+$ oc set triggers bc my-build --from-github
+```
