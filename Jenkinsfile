@@ -6,17 +6,20 @@ pipeline {
         PASS_PROD_LC = ""
         PASS_PROD_CN = ""
         
-        YOUR_CRED = credentials('jenkins-app-pipeline-credentials') 
+         
     }
 
     stages {
-         stage('Read BuildConfig') {
-            steps {
-                sh 'printenv'
-                sh 'echo $YOUR_CRED'
-
+         stage('Example Username/Password') {
+            environment {
+                SERVICE_CREDS = credentials('jenkins-app-pipeline-credentials')
             }
-        } 
+            steps {
+                sh 'echo "Service user is $SERVICE_CREDS_USR"'
+                sh 'echo "Service password is $SERVICE_CREDS_PSW"'
+                // sh 'curl -u $SERVICE_CREDS https://myservice.example.com'
+            }
+        }
         
 
 
