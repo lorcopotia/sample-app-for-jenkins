@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Read BuildConfig') {
+        /* stage('Read BuildConfig') {
             steps {
                 script {
                     openshift.withCluster() {
@@ -23,7 +23,7 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
         
         stage('Read synced credentials') {
             steps {
