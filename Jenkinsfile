@@ -12,44 +12,11 @@ pipeline {
     stages {
          stage('Read BuildConfig') {
             steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject(env.DEV_PROJECT) {
-                            openshift.withEnv('new-jenkins-pipeline') { //envVars ->
-                                // Accede a las variables de entorno del BuildConfig
-                                USER = envVars.USER
-                                PASS_PROD_LC = envVars.PASS_PROD_LC
-                                PASS_PROD_CN = envVars.PASS_PROD_CN
-                                
-                                echo "To call User use ${USER}"
-                                echo "To call PASS_PROD_LC use ${PASS_PROD_LC}"
-                                echo "To call PASS_PROD_CN use ${PASS_PROD_CN}"
-                            }
-                        }
-                    }
-                }
+                sh 'printenv'
             }
         } 
         
-        /* stage('Read synced credentials') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject(env.DEV_PROJECT) {
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${env.DEV_PROJECT}-pipeline-credentials", passwordVariable: 'PASS_PROD_LC']]) {
-                              // available as an env variable, but will be masked if you try to print it out any which way
-                              // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
-                              sh 'echo $PASS_PROD_LC'
-                              // also available as a Groovy variable
-                              echo PASS_PROD_LC
-                              // or inside double quotes for string interpolation
-                              echo "token is $PASS_PROD_LC"
-                            }
-                        }
-                    }
-                }
-            }
-        } */
+
 
         stage('Use BuildConfig Variable') {
             steps {
