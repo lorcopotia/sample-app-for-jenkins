@@ -48,8 +48,8 @@ pipeline {
                         }
                     }
                 }
-            } */
-        }
+            }
+        } */
 
         stage('Use BuildConfig Variable') {
             steps {
