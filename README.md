@@ -6,6 +6,11 @@ Para utilizar credenciales desde kubernetes ver los [ejemplos](https://jenkinsci
 El secreto deben haber sido creado de la siguiente manera:
 
 ```yaml
+# Pasando directamente los datos por la terminal
+$ oc create secret generic pipeline-credentials --from-literal=user=kubeadmin --from-literal=pass_prod_lc=S3cr3t0! --from-literal=pass_prod_cn=Sup3rsecret0 --namespace=jenkis-app
+
+# Cifrando con base64 los valores para las variables en cuestion
+$ echo -n 'super-secret-password' | base64
 $ oc create -f secret-creds.yaml
 $ cat secret-creds.yaml
 ---
@@ -51,4 +56,6 @@ Agregar el trigger correspondiente:
 
 ```shell
 $ oc set triggers bc my-build --from-github
+
+
 ```
