@@ -23,6 +23,24 @@ pipeline {
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
                 sh 'echo "Service password is $SERVICE_CREDS_PSW"'
+                
+                script {
+                    openshift.withCluster() { //openshift.withCluster( 'mycluster' )
+                        sh 'oc get pods'
+                        
+                        try {
+                            openshift.withCredentials( 'dgm-jenkins-pipeline-credentials-1' ) {
+                                openshift.newProject( 'dgm-jenkins' )
+                                // ...
+                                
+                            }
+                        } catch ( e ) {
+                            // The exception is a hudson.AbortException with details
+                            // about the failure.
+                            "Error encountered: ${e}"
+                        }
+                    }
+                }
             }
         }
     }
