@@ -29,8 +29,8 @@ pipeline {
                         sh 'oc get pods'
                         
                         try {
-                            openshift.withCredentials( 'dgm-jenkins-pipeline-credentials-1' ) {
-                                openshift.newProject( 'dgm-jenkins' )
+                            openshift.withCredentials( 'jenkins-app-pipeline-credentials-1' ) {
+                                openshift.newProject( 'jenkins-app' )
                                 // ...
                                 
                             }
