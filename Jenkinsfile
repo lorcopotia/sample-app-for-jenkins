@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
                 sh 'echo "Service password is $SERVICE_CREDS_PSW"'
-                sh 'docker login -u "$SERVICE_CREDS_USR" -p "$SERVICE_CREDS_PSW"'
+                sh 'podman login -u "$SERVICE_CREDS_USR" -p "$SERVICE_CREDS_PSW"'
             }
         }
         
