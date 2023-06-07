@@ -8,7 +8,7 @@ pipeline {
     stages {
          stage('Example Username/Password 1') {
             environment {
-                SERVICE_CREDS = credentials('dockerhub-credentials')
+                SERVICE_CREDS = credentials('jenkins-app-dockerhub-credentials')
             }
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
