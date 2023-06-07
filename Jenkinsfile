@@ -8,17 +8,18 @@ pipeline {
     stages {
          stage('Example Username/Password 1') {
             environment {
-                SERVICE_CREDS = credentials('jenkins-app-pipeline-credentials-1')
+                SERVICE_CREDS = credentials('dockerhub-credentials')
             }
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
                 sh 'echo "Service password is $SERVICE_CREDS_PSW"'
+                sh 'docker login -u "$SERVICE_CREDS_USR" -p "$SERVICE_CREDS_PSW"'
             }
         }
         
         stage('Example Username/Password 2') {
             environment {
-                SERVICE_CREDS = credentials('jenkins-app-pipeline-credentials-2')
+                SERVICE_CREDS = credentials('jenkins-app-pipeline-credentials-1')
             }
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
@@ -30,7 +31,7 @@ pipeline {
                         
                         try {
                             openshift.withCredentials( 'jenkins-app-pipeline-credentials-1' ) {
-                                openshift.newProject( 'jenkins-app' )
+                                openshift.newProject( 'borrame-1' )
                                 // ...
                                 
                             }
